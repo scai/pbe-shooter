@@ -1,6 +1,5 @@
-<things version="1">
 <?xml version="1.0" encoding="utf-8"?>
-
+<things version="1">
 	<entity name="spatialManager">
 		<component type="com.pblabs.rendering2D.BasicSpatialManager2D"
 			name="manager" />
@@ -34,7 +33,7 @@
 			name="spatial">
 			<spatialManager entityName="spatialManager" />
 			<velocity>
-                <x>0</x>
+				<x>0</x>
 				<y>-500</y>
 			</velocity>
 		</component>
@@ -44,7 +43,35 @@
 			<active>false</active>
 		</component>
 	</template>
-
+	
+	<template name="enemy">
+		<component type="com.pblabs.rendering2D.SpriteRenderer"
+			name="render">
+			<scene entityName="scene" componentName="scene" />
+			<fileName>assets/enemy.png</fileName>
+			<layerIndex>10</layerIndex>
+			<positionProperty>@spatial.position</positionProperty>
+			<sizeProperty>@spatial.size</sizeProperty>
+		</component>
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent"
+			name="spatial">
+			<spatialManager entityName="spatialManager" />
+			<size>
+				<x>40</x>
+				<y>40</y>
+			</size>
+		</component>
+	</template>
+	
+	<entity name="enemy1" template="enemy">
+		<component name="spatial">
+			<position>
+				<x>0</x>
+				<y>-200</y>
+			</position>
+		</component>
+	</entity>
+	
 	<entity name="player">
 		<component type="com.pblabs.rendering2D.SpriteRenderer"
 			name="render">
@@ -89,5 +116,6 @@
 		<objectReference name="spatialManager" />
 		<objectReference name="scene" />
 		<objectReference name="player" />
+		<objectReference name="enemy1" />
 	</group>
 </things>

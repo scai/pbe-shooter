@@ -1,6 +1,8 @@
 package com.caichoi
 {
+	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
+	import com.pblabs.engine.core.ObjectType;
 	import com.pblabs.rendering2D.SimpleShapeRenderer;
 	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	
@@ -43,6 +45,15 @@ package com.caichoi
 				return;
 			}
 			
+			var results:Array = [];
+			const hit:Boolean = spatial.spatialManager.queryRectangle(spatial.worldExtents, ObjectType.wildcard, results);
+			if(hit)
+			{
+				for(var v:Object in results)
+				{
+					trace(v);
+				}
+			}
 			/*
 			// blink
 			render.alpha += alphaDelta;
