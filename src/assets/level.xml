@@ -22,12 +22,12 @@
 			<scene entityName="scene" componentName="scene" />
 			<fillColor>0xFFFFFF</fillColor>
 			<lineColor>0xFFFFFF</lineColor>
-			<isCircle>true</isCircle>
+			<isSquare>true</isSquare>
 			<lineSize>2</lineSize>
-			<radius>4</radius>
 			<layerIndex>2</layerIndex>
 			<alpha>0</alpha>
 			<positionProperty>@spatial.position</positionProperty>
+			<sizeProperty>@spatial.size</sizeProperty>
 		</component>
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent"
 			name="spatial">
@@ -36,8 +36,12 @@
 				<x>0</x>
 				<y>-500</y>
 			</velocity>
+			<size>
+				<x>5</x>
+				<y>5</y>
+			</size>
 			<objectMask>
-                <typeName>bullet</typeName>
+				<typeName>bullet</typeName>
 			</objectMask>
 		</component>
 		<component type="com.caichoi.BulletController" name="controller">
@@ -60,13 +64,12 @@
 			name="spatial">
 			<spatialManager entityName="spatialManager" />
 			<size>
-				<x>40</x>
-				<y>40</y>
+				<x>30</x>
+				<y>30</y>
 			</size>
-			
-            <objectMask>
-                <typeName>enemy</typeName>
-            </objectMask>
+			<objectMask>
+				<typeName>enemy</typeName>
+			</objectMask>
 		</component>
 	</template>
 
@@ -76,6 +79,30 @@
 				<x>0</x>
 				<y>-200</y>
 			</position>
+		</component>
+	</entity>
+	<entity name="enemy2" template="enemy">
+		<component name="spatial">
+			<position>
+				<x>-100</x>
+				<y>-250</y>
+			</position>
+			<size>
+				<x>40</x>
+				<y>35</y>
+			</size>
+		</component>
+	</entity>
+	<entity name="enemy3" template="enemy">
+		<component name="spatial">
+			<position>
+				<x>120</x>
+				<y>-110</y>
+			</position>
+			<size>
+				<x>80</x>
+				<y>70</y>
+			</size>
 		</component>
 	</entity>
 
@@ -100,9 +127,9 @@
 				<x>0</x>
 				<y>0</y>
 			</position>
-            <objectMask>
-                <typeName>player</typeName>
-            </objectMask>
+			<objectMask>
+				<typeName>player</typeName>
+			</objectMask>
 		</component>
 
 		<component type="com.caichoi.KeyboardInput" name="keyboardInput">
@@ -122,10 +149,15 @@
 		</component>
 	</entity>
 
+	<group name="enemies">
+		<objectReference name="enemy1" />
+		<objectReference name="enemy2" />
+		<objectReference name="enemy3" />
+	</group>
 	<group name="main">
 		<objectReference name="spatialManager" />
 		<objectReference name="scene" />
 		<objectReference name="player" />
-		<objectReference name="enemy1" />
+		<groupReference name="enemies" />
 	</group>
 </things>

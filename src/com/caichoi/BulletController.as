@@ -55,18 +55,13 @@ package com.caichoi
 				return;
 			}
 			
+			// collision detection
 			var results:Array = [];
 			if(spatial.spatialManager.queryRectangle(spatial.worldExtents, ENEMY_OBJECT, results))
 			{
 				active = false;
+				return;
 			}
-			
-			// blink
-			render.alpha += alphaDelta;
-			if(render.alpha >= 1)
-				alphaDelta = -0.1;
-			else if(render.alpha <= 0.3)
-				alphaDelta = 0.1;
 		}
 	}
 }
