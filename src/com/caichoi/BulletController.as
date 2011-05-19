@@ -21,6 +21,9 @@ package com.caichoi
 		// state
 		private var _active:Boolean = false;
 		
+		// collision
+		private const ENEMY_OBJECT:ObjectType = new ObjectType("enemy");
+		
 		public function BulletController()
 		{
 			super();
@@ -32,7 +35,15 @@ package com.caichoi
 			
 			spatial.registerForTicks = value;
 			registerForTicks = value;
-			render.alpha = value ? 1 : 0;
+			if(value)
+			{
+				render.alpha = 1;
+			}
+			else
+			{
+				render.alpha = 0;
+				PlayerController.bulletPool.push(this.owner);
+			}
 		}
 		
 		override public function onTick(time:Number):void
@@ -41,27 +52,21 @@ package com.caichoi
 			if(spatial.y < - (Main.BOUND_Y + 100))  // 让子弹飞一会儿
 			{
 				active = false;
-				PlayerController.bulletPool.push(this.owner);
 				return;
 			}
 			
 			var results:Array = [];
-			const hit:Boolean = spatial.spatialManager.queryRectangle(spatial.worldExtents, ObjectType.wildcard, results);
-			if(hit)
+			if(spatial.spatialManager.queryRectangle(spatial.worldExtents, ENEMY_OBJECT, results))
 			{
-				for(var v:Object in results)
-				{
-					trace(v);
-				}
+				active = false;
 			}
-			/*
+			
 			// blink
 			render.alpha += alphaDelta;
 			if(render.alpha >= 1)
 				alphaDelta = -0.1;
 			else if(render.alpha <= 0.3)
 				alphaDelta = 0.1;
-			*/
 		}
 	}
 }
