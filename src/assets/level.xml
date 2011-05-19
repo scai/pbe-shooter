@@ -107,11 +107,19 @@
 	</entity>
 
 	<entity name="player">
-		<component type="com.pblabs.rendering2D.SpriteRenderer"
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent"
+			name="animatedSpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>1</xCount>
+				<yCount>4</yCount>
+			</divider>
+			<image filename="assets/plane-turn.png" />
+		</component>
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer"
 			name="render">
 			<scene entityName="scene" componentName="scene" />
-			<fileName>assets/plane.png</fileName>
-			<layerIndex>10</layerIndex>
+			<spriteSheet componentName="animatedSpriteSheet" />
+			<spriteIndex>0</spriteIndex>
 			<positionProperty>@spatial.position</positionProperty>
 			<sizeProperty>@spatial.size</sizeProperty>
 		</component>
@@ -145,6 +153,7 @@
 		<component type="com.caichoi.PlayerController" name="controller">
 			<keyboardInput componentName="keyboardInput" />
 			<spatial componentName="spatial" />
+			<render componentName="render" />
 			<shootInterval>0.1</shootInterval>
 		</component>
 	</entity>

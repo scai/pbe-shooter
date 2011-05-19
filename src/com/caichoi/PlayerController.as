@@ -2,11 +2,13 @@ package com.caichoi
 {
 	import Box2D.Common.Math.b2Math;
 	
+	import com.pblabs.animation.AnimatorComponent;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.rendering2D.SimpleShapeRenderer;
 	import com.pblabs.rendering2D.SimpleSpatialComponent;
+	import com.pblabs.rendering2D.SpriteSheetRenderer;
 	
 	import flash.utils.flash_proxy;
 	
@@ -22,8 +24,8 @@ package com.caichoi
 		
 		// set in level manager
 		public var keyboardInput:KeyboardInput;
-		// set in level manager
 		public var spatial:SimpleSpatialComponent;
+		public var render:SpriteSheetRenderer;
 		
 		// motion physics
 		private static const X:int = 30;
@@ -65,6 +67,14 @@ package com.caichoi
 				spatial.velocity.y = 0;
 			else
 				spatial.velocity.y = spatial.velocity.y;
+			
+			// animation
+			if(keyboardInput.left > 0)
+				render.spriteIndex = 2;
+			else if(keyboardInput.right > 0)
+				render.spriteIndex = 1;
+			else
+				render.spriteIndex = 0;
 			
 			// fire
 			if(sinceLastShoot < shootInterval)

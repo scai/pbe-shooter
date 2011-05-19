@@ -6,6 +6,8 @@ package com.caichoi
 	import com.pblabs.rendering2D.ui.SceneView;
 	import com.pblabs.screens.BaseScreen;
 	
+	import flash.text.TextField;
+	
 	public class GameScreen extends BaseScreen
 	{
 		private var sceneView:SceneView = new SceneView();
@@ -30,6 +32,12 @@ package com.caichoi
 			graphics.beginBitmapFill(imageResource.image.bitmapData);
 			graphics.drawRect(0, 0, sceneView.width, sceneView.height);
 			graphics.endFill();
+			
+			
+			var t:TextField = new TextField();
+			t.textColor = 0xFFFFFF;
+			t.text = "Shooter";
+			PBE.mainStage.addChild(t);
 		}
 		
 		private function imageLoadFailedHandler(imageResource:ImageResource):void

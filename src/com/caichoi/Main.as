@@ -1,5 +1,8 @@
 package com.caichoi
 {
+	import com.pblabs.animation.Animator;
+	import com.pblabs.animation.AnimatorComponent;
+	import com.pblabs.animation.AnimatorType;
 	import com.pblabs.engine.*;
 	import com.pblabs.engine.core.LevelEvent;
 	import com.pblabs.engine.core.TemplateManager;
@@ -10,6 +13,7 @@ package com.caichoi
 	import flash.display.Sprite;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
+	import flash.text.TextField;
 	
 	[SWF(width="400", height="600", frameRate="60", backgroundColor="0x000000")]
 	public class Main extends Sprite
@@ -36,6 +40,11 @@ package com.caichoi
 			PBE.registerType(KeyboardInput);
 			PBE.registerType(PlayerController);
 			PBE.registerType(BulletController);
+			PBE.registerType(SpriteSheetRenderer);
+			PBE.registerType(CellCountDivider);
+			PBE.registerType(Animator);
+			PBE.registerType(AnimatorType);
+			PBE.registerType(AnimatorComponent);
 			
 			PBE.startup(this);
 			PBE.addResources(new Resources());
