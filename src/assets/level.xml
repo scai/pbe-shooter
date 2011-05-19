@@ -1,0 +1,93 @@
+<things version="1">
+<?xml version="1.0" encoding="utf-8"?>
+
+	<entity name="spatialManager">
+		<component type="com.pblabs.rendering2D.BasicSpatialManager2D"
+			name="manager" />
+	</entity>
+
+	<entity name="scene">
+		<component type="com.pblabs.rendering2D.DisplayObjectScene"
+			name="scene">
+			<sceneViewName>sceneView</sceneViewName>
+			<position>
+				<x>0</x>
+				<y>0</y>
+			</position>
+		</component>
+	</entity>
+
+	<template name="bullet">
+		<component type="com.pblabs.rendering2D.SimpleShapeRenderer"
+			name="render">
+			<scene entityName="scene" componentName="scene" />
+			<fillColor>0xFFFFFF</fillColor>
+			<lineColor>0xFFFFFF</lineColor>
+			<isCircle>true</isCircle>
+			<lineSize>2</lineSize>
+			<radius>4</radius>
+			<layerIndex>2</layerIndex>
+			<alpha>0</alpha>
+			<positionProperty>@spatial.position</positionProperty>
+		</component>
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent"
+			name="spatial">
+			<spatialManager entityName="spatialManager" />
+			<velocity>
+                <x>0</x>
+				<y>-500</y>
+			</velocity>
+		</component>
+		<component type="com.caichoi.BulletController" name="controller">
+			<render componentName="render" />
+			<spatial componentName="spatial" />
+			<active>false</active>
+		</component>
+	</template>
+
+	<entity name="player">
+		<component type="com.pblabs.rendering2D.SpriteRenderer"
+			name="render">
+			<scene entityName="scene" componentName="scene" />
+			<fileName>assets/plane.png</fileName>
+			<layerIndex>10</layerIndex>
+			<positionProperty>@spatial.position</positionProperty>
+			<sizeProperty>@spatial.size</sizeProperty>
+		</component>
+
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent"
+			name="spatial">
+			<spatialManager entityName="spatialManager" />
+			<size>
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<position>
+				<x>0</x>
+				<y>0</y>
+			</position>
+		</component>
+
+		<component type="com.caichoi.KeyboardInput" name="keyboardInput">
+			<inputMap childType="com.pblabs.engine.core.InputKey">
+				<up>W</up>
+				<down>S</down>
+				<left>A</left>
+				<right>D</right>
+				<shoot>J</shoot>
+			</inputMap>
+		</component>
+
+		<component type="com.caichoi.PlayerController" name="controller">
+			<keyboardInput componentName="keyboardInput" />
+			<spatial componentName="spatial" />
+			<shootInterval>0.1</shootInterval>
+		</component>
+	</entity>
+
+	<group name="main">
+		<objectReference name="spatialManager" />
+		<objectReference name="scene" />
+		<objectReference name="player" />
+	</group>
+</things>
