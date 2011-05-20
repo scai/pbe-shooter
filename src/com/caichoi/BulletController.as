@@ -1,8 +1,10 @@
 package com.caichoi
 {
+	import com.pblabs.animation.AnimatorComponent;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.core.ObjectType;
+	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.rendering2D.SimpleShapeRenderer;
 	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	
@@ -59,6 +61,9 @@ package com.caichoi
 			var results:Array = [];
 			if(spatial.spatialManager.queryRectangle(spatial.worldExtents, ENEMY_OBJECT, results))
 			{
+				const enemySpatial:SimpleSpatialComponent = results[0] as SimpleSpatialComponent;
+				const health:EnemyHealth = enemySpatial.owner.lookupComponentByName("health") as EnemyHealth;
+				health.hit();
 				active = false;
 				return;
 			}

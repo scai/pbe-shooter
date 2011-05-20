@@ -51,62 +51,10 @@
 		</component>
 	</template>
 
-	<template name="enemy">
-		<component type="com.pblabs.rendering2D.SpriteRenderer"
-			name="render">
-			<scene entityName="scene" componentName="scene" />
-			<fileName>assets/enemy.png</fileName>
-			<layerIndex>10</layerIndex>
-			<positionProperty>@spatial.position</positionProperty>
-			<sizeProperty>@spatial.size</sizeProperty>
-		</component>
-		<component type="com.pblabs.rendering2D.SimpleSpatialComponent"
-			name="spatial">
-			<spatialManager entityName="spatialManager" />
-			<size>
-				<x>30</x>
-				<y>30</y>
-			</size>
-			<objectMask>
-				<typeName>enemy</typeName>
-			</objectMask>
-		</component>
-	</template>
-
-	<entity name="enemy1" template="enemy">
-		<component name="spatial">
-			<position>
-				<x>0</x>
-				<y>-200</y>
-			</position>
-		</component>
-	</entity>
-	<entity name="enemy2" template="enemy">
-		<component name="spatial">
-			<position>
-				<x>-100</x>
-				<y>-250</y>
-			</position>
-			<size>
-				<x>40</x>
-				<y>35</y>
-			</size>
-		</component>
-	</entity>
-	<entity name="enemy3" template="enemy">
-		<component name="spatial">
-			<position>
-				<x>120</x>
-				<y>-110</y>
-			</position>
-			<size>
-				<x>80</x>
-				<y>70</y>
-			</size>
-		</component>
-	</entity>
-
+	<!-- player jet -->
 	<entity name="player">
+
+		<!-- sprite sheet -->
 		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent"
 			name="animatedSpriteSheet">
 			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
@@ -115,6 +63,8 @@
 			</divider>
 			<image filename="assets/plane-turn.png" />
 		</component>
+
+		<!-- view -->
 		<component type="com.pblabs.rendering2D.SpriteSheetRenderer"
 			name="render">
 			<scene entityName="scene" componentName="scene" />
@@ -124,6 +74,7 @@
 			<sizeProperty>@spatial.size</sizeProperty>
 		</component>
 
+		<!-- spatial -->
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent"
 			name="spatial">
 			<spatialManager entityName="spatialManager" />
@@ -133,13 +84,14 @@
 			</size>
 			<position>
 				<x>0</x>
-				<y>0</y>
+				<y>250</y>
 			</position>
 			<objectMask>
 				<typeName>player</typeName>
 			</objectMask>
 		</component>
 
+		<!-- keyboard input -->
 		<component type="com.caichoi.KeyboardInput" name="keyboardInput">
 			<inputMap childType="com.pblabs.engine.core.InputKey">
 				<up>W</up>
@@ -150,6 +102,7 @@
 			</inputMap>
 		</component>
 
+		<!-- controller -->
 		<component type="com.caichoi.PlayerController" name="controller">
 			<keyboardInput componentName="keyboardInput" />
 			<spatial componentName="spatial" />
@@ -158,15 +111,73 @@
 		</component>
 	</entity>
 
-	<group name="enemies">
-		<objectReference name="enemy1" />
-		<objectReference name="enemy2" />
-		<objectReference name="enemy3" />
-	</group>
+    <!------------------------- enemy --------------------------------------->
+    <template name="enemy">
+
+        <!-- sprite sheet -->
+        <component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent"
+            name="animatedSpriteSheet">
+            <divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+                <xCount>1</xCount>
+                <yCount>6</yCount>
+            </divider>
+            <image filename="assets/enemy-sprite.png" />
+        </component>
+
+        <!-- animator -->
+        <component type="com.pblabs.animation.AnimatorComponent"
+            name="spriteAnimations">
+            <animations childType="com.pblabs.animation.Animator">
+                <idle>
+                    <animationType>LOOP_ANIMATION</animationType>
+                    <duration>2</duration>
+                    <repeatCount>-1</repeatCount>
+                    <startValue type="int">3</startValue>
+                    <targetValue type="int">6</targetValue>
+                </idle>
+                <hit>
+                    <animationType>LOOP_ANIMATION</animationType>
+                    <duration>0.4</duration>
+                    <repeatCount>1</repeatCount>
+                    <startValue type="int">0</startValue>
+                    <targetValue type="int">3</targetValue>
+                </hit>
+            </animations>
+            <defaultAnimation>idle</defaultAnimation>
+            <reference>@render.spriteIndex</reference>
+        </component>
+
+        <!-- view -->
+        <component type="com.pblabs.rendering2D.SpriteSheetRenderer"
+            name="render">
+            <scene entityName="scene" componentName="scene" />
+            <spriteSheet componentName="animatedSpriteSheet" />
+            <layerIndex>10</layerIndex>
+            <positionProperty>@spatial.position</positionProperty>
+            <sizeProperty>@spatial.size</sizeProperty>
+        </component>
+
+        <!-- spatial -->
+        <component type="com.pblabs.rendering2D.SimpleSpatialComponent"
+            name="spatial">
+            <spatialManager entityName="spatialManager" />
+            <size>
+                <x>30</x>
+                <y>30</y>
+            </size>
+            <objectMask>
+                <typeName>enemy</typeName>
+            </objectMask>
+        </component>
+
+        <!-- health -->
+        <component type="com.caichoi.EnemyHealth" name="health">
+        </component>
+    </template>
+    
 	<group name="main">
 		<objectReference name="spatialManager" />
 		<objectReference name="scene" />
 		<objectReference name="player" />
-		<groupReference name="enemies" />
 	</group>
 </things>
