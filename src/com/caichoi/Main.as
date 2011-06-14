@@ -48,6 +48,7 @@ package com.caichoi
 			PBE.registerType(Animator);
 			PBE.registerType(AnimatorType);
 			PBE.registerType(AnimatorComponent);
+			PBE.registerType(EnemyHealth);
 			
 			PBE.startup(this);
 			PBE.addResources(new Resources());
