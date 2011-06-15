@@ -176,7 +176,7 @@
 			name="explosionSpriteSheet">
 			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
 				<xCount>5</xCount>
-				<yCount>5</yCount>
+				<yCount>7</yCount>
 			</divider>
 			<image filename="assets/explosion17.png" />
 		</component>
@@ -186,13 +186,15 @@
 				<explode>
 					<animationType>PLAY_ANIMATION_ONCE</animationType>
 					<duration>1</duration>
-					<repeatCount>0</repeatCount>
-					<startValue type="int">0</startValue>
-					<targetValue type="int">25</targetValue>
+					<startValue type="int">5</startValue>
+					<targetValue type="int">30</targetValue>
 				</explode>
 			</animations>
-			<defaultAnimation>explode</defaultAnimation>
 			<reference>@render.spriteIndex</reference>
+		</component>
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent"
+			name="spatial">
+			<spatialManager entityName="spatialManager" />
 		</component>
 		<component type="com.pblabs.rendering2D.SpriteSheetRenderer"
 			name="render">
@@ -201,11 +203,6 @@
 			<layerIndex>20</layerIndex>
 			<positionProperty>@spatial.position</positionProperty>
 			<sizeProperty>@spatial.size</sizeProperty>
-		</component>
-		<!-- spatial -->
-		<component type="com.pblabs.rendering2D.SimpleSpatialComponent"
-			name="spatial">
-			<spatialManager entityName="spatialManager" />
 		</component>
 	</template>
 

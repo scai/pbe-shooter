@@ -1,5 +1,7 @@
 package com.caichoi
 {
+	import com.pblabs.animation.AnimationEvent;
+	import com.pblabs.animation.Animator;
 	import com.pblabs.animation.AnimatorComponent;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.entity.EntityComponent;
@@ -48,10 +50,7 @@ package com.caichoi
 		
 		private function playExplosionAnimation():void
 		{
-			const explosionEntity:IEntity = PBE.templateManager.instantiateEntity("explosion");
-			const explosionSpatial:SimpleSpatialComponent = explosionEntity.lookupComponentByName("spatial") as SimpleSpatialComponent;
-			explosionSpatial.position = spatial.position;
-			explosionSpatial.size = spatial.size;
+			ExplosionFactory.instance.explodeAt(spatial);
 		}
 	}
 }
