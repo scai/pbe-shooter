@@ -34,24 +34,26 @@ package com.caichoi
 		public function set active(value:Boolean):void
 		{
 			_active = value;
-			
 			spatial.registerForTicks = value;
-			registerForTicks = value;
+			this.registerForTicks = value;
 			if(value)
 			{
-				render.alpha = 1;
+				spatial.size.x = 10;
 			}
 			else
 			{
-				render.alpha = 0;
+				spatial.size.x = 0;
 				PlayerController.bulletPool.push(this.owner);
 			}
 		}
 		
 		override public function onTick(time:Number):void
 		{
+			if(!_active)
+				return;
+			
 			// deactivate if not visible
-			if(spatial.y < - (Main.BOUND_Y + 100))  // 让子弹飞一会儿
+			if(spatial.y < -Main.BOUND_Y)  // 让子弹飞一会儿
 			{
 				active = false;
 				return;

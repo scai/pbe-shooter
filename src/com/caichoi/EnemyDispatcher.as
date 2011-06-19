@@ -9,7 +9,8 @@ package com.caichoi
 	
 	public class EnemyDispatcher extends TickedComponent
 	{
-		private static const DISPATCH_INTERVAL:Number = 1.2; // 3 seconds
+		// Number of seconds to dispatch next enemy.
+		private static const DISPATCH_INTERVAL:Number = 1.2;
 		
 		public function EnemyDispatcher()
 		{
