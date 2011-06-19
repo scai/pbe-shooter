@@ -15,6 +15,10 @@
 			</position>
 		</component>
 	</entity>
+	
+	<entity name="dispatcher">
+		<component type="com.caichoi.EnemyDispatcher" name="controller" />
+	</entity>
 
 	<template name="bullet">
 		<component type="com.pblabs.rendering2D.SimpleShapeRenderer"
@@ -151,6 +155,7 @@
 			<layerIndex>10</layerIndex>
 			<positionProperty>@spatial.position</positionProperty>
 			<sizeProperty>@spatial.size</sizeProperty>
+			<rotationProperty>@spatial.rotation</rotationProperty>
 		</component>
 
 		<!-- spatial -->
@@ -161,11 +166,19 @@
 				<x>30</x>
 				<y>30</y>
 			</size>
+			<velocity>
+				<x>0</x>
+				<y>10</y>
+			</velocity>
 			<objectMask>
 				<typeName>enemy</typeName>
 			</objectMask>
 		</component>
-
+		
+		<!-- controller -->
+		<component type="com.caichoi.EnemyController" name="controller">
+		</component>
+		
 		<!-- health -->
 		<component type="com.caichoi.EnemyHealth" name="health">
 		</component>
@@ -210,5 +223,6 @@
 		<objectReference name="spatialManager" />
 		<objectReference name="scene" />
 		<objectReference name="player" />
+		<objectReference name="dispatcher" />
 	</group>
 </things>
