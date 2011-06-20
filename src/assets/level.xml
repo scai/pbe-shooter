@@ -99,11 +99,11 @@
 		<!-- keyboard input -->
 		<component type="com.caichoi.KeyboardInput" name="keyboardInput">
 			<inputMap childType="com.pblabs.engine.core.InputKey">
-				<up>W</up>
-				<down>S</down>
-				<left>A</left>
-				<right>D</right>
-				<shoot>J</shoot>
+				<up>UP</up>
+				<down>DOWN</down>
+				<left>LEFT</left>
+				<right>RIGHT</right>
+				<shoot>SPACE</shoot>
 			</inputMap>
 		</component>
 
