@@ -15,17 +15,21 @@
 			</position>
 		</component>
 	</entity>
+	
+	<entity name="dispatcher">
+		<component type="com.caichoi.EnemyDispatcher" name="controller" />
+	</entity>
 
 	<template name="bullet">
 		<component type="com.pblabs.rendering2D.SimpleShapeRenderer"
 			name="render">
 			<scene entityName="scene" componentName="scene" />
-			<fillColor>0xFFFFFF</fillColor>
+			<fillColor>0xAAAAFF</fillColor>
+			<fillAlpha>99</fillAlpha>
 			<lineColor>0xFFFFFF</lineColor>
-			<isSquare>true</isSquare>
+			<isCircle>true</isCircle>
 			<lineSize>2</lineSize>
-			<layerIndex>2</layerIndex>
-			<alpha>0</alpha>
+			<layerIndex>1</layerIndex>
 			<positionProperty>@spatial.position</positionProperty>
 			<sizeProperty>@spatial.size</sizeProperty>
 		</component>
@@ -37,8 +41,8 @@
 				<y>-500</y>
 			</velocity>
 			<size>
-				<x>5</x>
-				<y>5</y>
+				<x>10</x>
+				<y>10</y>
 			</size>
 			<objectMask>
 				<typeName>bullet</typeName>
@@ -72,6 +76,7 @@
 			<spriteIndex>0</spriteIndex>
 			<positionProperty>@spatial.position</positionProperty>
 			<sizeProperty>@spatial.size</sizeProperty>
+			<layerIndex>100</layerIndex>
 		</component>
 
 		<!-- spatial -->
@@ -94,11 +99,11 @@
 		<!-- keyboard input -->
 		<component type="com.caichoi.KeyboardInput" name="keyboardInput">
 			<inputMap childType="com.pblabs.engine.core.InputKey">
-				<up>W</up>
-				<down>S</down>
-				<left>A</left>
-				<right>D</right>
-				<shoot>J</shoot>
+				<up>UP</up>
+				<down>DOWN</down>
+				<left>LEFT</left>
+				<right>RIGHT</right>
+				<shoot>SPACE</shoot>
 			</inputMap>
 		</component>
 
@@ -107,7 +112,7 @@
 			<keyboardInput componentName="keyboardInput" />
 			<spatial componentName="spatial" />
 			<render componentName="render" />
-			<shootInterval>0.1</shootInterval>
+			<shootInterval>0.15</shootInterval>
 		</component>
 	</entity>
 
@@ -151,6 +156,7 @@
 			<layerIndex>10</layerIndex>
 			<positionProperty>@spatial.position</positionProperty>
 			<sizeProperty>@spatial.size</sizeProperty>
+			<rotationProperty>@spatial.rotation</rotationProperty>
 		</component>
 
 		<!-- spatial -->
@@ -161,11 +167,19 @@
 				<x>30</x>
 				<y>30</y>
 			</size>
+			<velocity>
+				<x>0</x>
+				<y>10</y>
+			</velocity>
 			<objectMask>
 				<typeName>enemy</typeName>
 			</objectMask>
 		</component>
-
+		
+		<!-- controller -->
+		<component type="com.caichoi.EnemyController" name="controller">
+		</component>
+		
 		<!-- health -->
 		<component type="com.caichoi.EnemyHealth" name="health">
 		</component>
@@ -210,5 +224,6 @@
 		<objectReference name="spatialManager" />
 		<objectReference name="scene" />
 		<objectReference name="player" />
+		<objectReference name="dispatcher" />
 	</group>
 </things>
