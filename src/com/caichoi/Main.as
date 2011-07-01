@@ -51,6 +51,7 @@ package com.caichoi
 			PBE.registerType(EnemyHealth);
 			PBE.registerType(EnemyController);
 			PBE.registerType(EnemyDispatcher);
+			PBE.registerType(ScrollingBitmapRenderer);
 			
 			PBE.startup(this);
 			PBE.addResources(new Resources());

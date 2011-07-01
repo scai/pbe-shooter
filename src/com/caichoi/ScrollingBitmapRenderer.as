@@ -14,12 +14,12 @@ package com.caichoi
 	 */
 	public class ScrollingBitmapRenderer extends BitmapRenderer
 	{
-		private var srcBitmap:Bitmap;
-		private var scrollRect:Rectangle;
-		private var emptyBitmapData:BitmapData;
-		private var scrollBitmapData:BitmapData;
-		private var scroll:Point = new Point();
-		private var scrollSpeed:Point = new Point(10, 0);
+		public var srcBitmap:Bitmap;
+		public var scrollRect:Rectangle;
+		public var emptyBitmapData:BitmapData;
+		public var scrollBitmapData:BitmapData;
+		public var scroll:Point = new Point();
+		public var scrollSpeed:Point = new Point(10, 0);
 		
 		public function ScrollingBitmapRenderer(bitmap:Bitmap, width:int, height:int)
 		{

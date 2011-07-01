@@ -10,14 +10,15 @@ package com.caichoi
 	public class EnemyDispatcher extends TickedComponent
 	{
 		// Number of seconds to dispatch next enemy.
-		private static const DISPATCH_INTERVAL:Number = 1.2;
+		private static const DISPATCH_INTERVAL:Number = 6;
+		private static const BATCH_SIZE:uint = 3;
 		
 		public function EnemyDispatcher()
 		{
 			super();
 		}
 		
-		private var timeSinceLastDispatch:Number = 0;
+		private var timeSinceLastDispatch:Number = DISPATCH_INTERVAL;
 		
 		override public function onTick(deltaTime:Number):void
 		{
@@ -26,7 +27,8 @@ package com.caichoi
 			if(timeSinceLastDispatch >= DISPATCH_INTERVAL)
 			{
 				timeSinceLastDispatch = 0;
-				dispatch();
+				for(var i:int = 0; i < BATCH_SIZE; i++)
+					dispatch();
 			}
 		}
 		
@@ -36,14 +38,14 @@ package com.caichoi
 			const enemyEntity:IEntity = PBE.templateManager.instantiateEntity("enemy");
 			const enemySpatial:SimpleSpatialComponent = enemyEntity.lookupComponentByName("spatial") as SimpleSpatialComponent;
 			
-			const size:uint = Math.random() * 40 + 40;
+			const size:uint = Math.random() * 30 + 30;
 			const posX:int = Math.random() * (Main.WIDTH - 2 * size) - (Main.BOUND_X - size);
 			const posY:int = -(Main.BOUND_Y + size);
 			const velY:int = Math.random() * 50 + 50;
 			enemySpatial.position = new Point(posX, posY); 
 			enemySpatial.size = new Point(size, size);
 			enemySpatial.velocity = new Point(0, velY);
-			enemySpatial.rotation = 180;
+			//enemySpatial.rotation = 180;
 			(enemyEntity.lookupComponentByName("health") as EnemyHealth).health = size / 10;
 		}
 		
